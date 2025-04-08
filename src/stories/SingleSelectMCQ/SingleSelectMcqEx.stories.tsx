@@ -4,7 +4,7 @@ import SingleSelectMcqOptions from "@/answer-Components/singleSelectMcq/singleSe
 import SingleSelectMcqOption from "@/answer-Components/singleSelectMcq/singleSelectMcqOption";
 
 const meta: Meta<typeof SingleSelectMcqOptions> = {
-  title: "AnswerComponents/SingleSelectMcq/Options",
+  title: "AnswerComponents/SingleSelectMcq",
   component: SingleSelectMcqOptions,
   tags: ["autodocs"],
 };
@@ -21,18 +21,22 @@ interface TemplateProps {
 const Template: FC<TemplateProps> = ({ initialSelected }) => {
   const [selected, setSelected] = useState(initialSelected);
   return (
-    <SingleSelectMcqOptions value={selected} onChange={setSelected}>
-      <SingleSelectMcqOption value="option1" label="Option 1" />
-      <SingleSelectMcqOption value="option2" label="Option 2" />
-      <SingleSelectMcqOption value="option3" label="Option 3" />
-    </SingleSelectMcqOptions>
+    <>
+      <p className="font-semibold py-2.5">What's the main ingredient in "air pie"?</p>
+      <SingleSelectMcqOptions
+        className="grid grid-cols-2 w-1/2"
+        value={selected}
+        onChange={setSelected}
+      >
+        <SingleSelectMcqOption value="flour" label="Flour" />
+        <SingleSelectMcqOption value="sugar" label="Sugar" />
+        <SingleSelectMcqOption value="hopes&dreams" label="Hopes and dreams" />
+        <SingleSelectMcqOption value="invisibleFruit" label="Invisible fruit" />
+      </SingleSelectMcqOptions>
+    </>
   );
 };
 
-export const Default: Story = {
+export const Example: Story = {
   render: () => <Template initialSelected="option1" />,
-};
-
-export const NoPreselection: Story = {
-  render: () => <Template initialSelected="" />,
 };

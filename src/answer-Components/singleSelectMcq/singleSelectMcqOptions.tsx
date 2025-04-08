@@ -1,32 +1,23 @@
-import {FC} from "react";
+import { FC, ReactNode } from "react";
 import { RadioGroup } from "@/components/ui/radio-group";
-import  SingleSelectMcqOption  from "./singleSelectMcqOption";
+import { RadioGroupProps } from "@radix-ui/react-radio-group";
 
-export interface Option {
-  value: string;
-  label: string;
-}
-
-export interface SingleSelectMcqOptionsProps {
-  options: Option[];
+export interface SingleSelectMcqOptionsProps
+  extends Omit<RadioGroupProps, "onChange"> {
+  children: ReactNode;
   value: string;
   onChange: (value: string) => void;
 }
 
 const SingleSelectMcqOptions: FC<SingleSelectMcqOptionsProps> = ({
-  options,
+  children,
   value,
   onChange,
+  ...props
 }) => {
   return (
-    <RadioGroup value={value} onValueChange={onChange}>
-      {options.map((option) => (
-        <SingleSelectMcqOption
-          key={option.value}
-          value={option.value}
-          label={option.label}
-        />
-      ))}
+    <RadioGroup value={value} onValueChange={onChange} {...props}>
+      {children}
     </RadioGroup>
   );
 };
