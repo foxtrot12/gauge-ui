@@ -2,6 +2,7 @@ import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CheckboxProps } from "@radix-ui/react-checkbox";
 import { generateRandomString } from "@/utilities/jsUtils";
+import { Label } from "@/components/ui/label";
 
 export interface MultiSelectMcqOptionProps
   extends Omit<CheckboxProps, "onChange"> {
@@ -24,13 +25,10 @@ const MultiSelectMcqOption: React.FC<MultiSelectMcqOptionProps> = ({
 }: MultiSelectMcqOptionProps) => {
   id = id ?? generateRandomString(4);
   return (
-    <label
+    <Label
       htmlFor={id}
-      className={
-        outerClassName ??
-        "flex items-center cursor-pointer gap-2"
-      }
-    >
+      className={outerClassName ?? `flex items-center gap-2 p-2 ${props.disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+      >
       <Checkbox
         value={value}
         checked={checked}
@@ -39,7 +37,7 @@ const MultiSelectMcqOption: React.FC<MultiSelectMcqOptionProps> = ({
         {...props}
       />
       {label}
-    </label>
+    </Label>
   );
 };
 

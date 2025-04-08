@@ -1,3 +1,4 @@
+import { Label } from "@/components/ui/label";
 import { RadioGroupItem } from "@/components/ui/radio-group";
 import { generateRandomString } from "@/utilities/jsUtils";
 import { RadioGroupItemProps } from "@radix-ui/react-radio-group";
@@ -18,12 +19,23 @@ const SingleSelectMcqOption: FC<SingleSelectMcqOptionProps> = ({
 }) => {
   id = id ?? generateRandomString(4);
   return (
-    <div
-      className={outerClassname ? outerClassname : "gap-2 flex items-center"}
+    <Label
+      htmlFor={id}
+      className={
+        outerClassname ??
+        `gap-2 flex items-center p-2 ${
+          props.disabled ? "cursor-not-allowed" : "cursor-pointer"
+        }`
+      }
     >
-      <RadioGroupItem value={value} id={id} {...props} />
-      <label htmlFor={id}>{label}</label>
-    </div>
+      <RadioGroupItem
+        className="cursor-pointer"
+        value={value}
+        id={id}
+        {...props}
+      />
+      {label}
+    </Label>
   );
 };
 
